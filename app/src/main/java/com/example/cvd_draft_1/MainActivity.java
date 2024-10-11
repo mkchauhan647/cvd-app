@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.nav_create) {
                     // Navigate to ScriptActivity
-                    Intent intent = new Intent(MainActivity.this, ScriptActivity.class);
+                    Intent intent = new Intent(MainActivity.this,CreateVideoActivity.class);
                     startActivity(intent);
                     return true;
                 }

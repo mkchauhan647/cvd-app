@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,337 +7,713 @@
     android:background="@color/backgroundColor"
     tools:context=".CreateVideoActivity">
 
-        <!-- Camera Preview -->
-        <androidx.camera.view.PreviewView
-            android:id="@+id/previewView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:contentDescription="@string/preview_view_description"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
-        <!-- Teleprompter Layout -->
-        <LinearLayout
-            android:id="@+id/teleprompter_layout"
+
+
+    <!-- Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/preview_view_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" >
+
+        <!-- Default Video Recording Image (overlay) -->
+        <ImageView
+            android:id="@+id/recordingImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/video_library"
+            android:layout_gravity="center"
+            android:layout_marginBottom="70dp" />
+
+        <!--        <com.example.cvd_draft_1.OverlayView-->
+        <!--            android:id="@+id/overlayView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:visibility="gone" />-->
+
+
+
+    </androidx.camera.view.PreviewView>
+
+    <com.example.cvd_draft_1.OverlayView
+        android:id="@+id/overlayView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@id/previewView"
+        app:layout_constraintBottom_toBottomOf="@id/previewView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- Add this inside your existing layout -->
+    <ImageView
+        android:id="@+id/outputImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+
+
+
+
+
+    <!--        &lt;!&ndash; Teleprompter Layout &ndash;&gt;-->
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/teleprompter_layout"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="154dp"-->
+    <!--            android:alpha="0.8"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:orientation="vertical"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="@+id/previewView">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/script_text"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="16dp"-->
+    <!--                android:text="@string/sample_script"-->
+    <!--                android:textColor="@color/textSecondary"-->
+    <!--                android:textSize="24sp"-->
+    <!--                android:importantForAccessibility="yes"-->
+    <!--                android:accessibilityLiveRegion="polite" />-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <Button-->
+    <!--                    android:id="@+id/btn_decrease_speed"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:backgroundTint="@color/theme"-->
+    <!--                    android:contentDescription="@string/decrease_speed"-->
+    <!--                    android:background="@drawable/rounded_button"-->
+    <!--                    android:text="-"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="24sp"-->
+    <!--                    android:importantForAccessibility="yes"-->
+    <!--                    android:layout_margin="5dp"-->
+    <!--                    />-->
+
+    <!--                <Button-->
+    <!--                    android:id="@+id/btn_increase_speed"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:backgroundTint="@color/theme"-->
+    <!--                    android:contentDescription="@string/increase_speed"-->
+    <!--                    android:background="@drawable/rounded_button"-->
+    <!--                    android:text="+"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="24sp"-->
+    <!--                    android:importantForAccessibility="yes"-->
+    <!--                    android:layout_margin="5dp"-->
+    <!--                    />-->
+    <!--            </LinearLayout>-->
+    <!--        </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/teleprompter_layout"
+        android:layout_width="match_parent"
+        android:layout_height="154dp"
+        android:alpha="0.9"
+        android:orientation="vertical"
+        android:background="@color/backgroundColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/previewView">
+
+        <HorizontalScrollView
+            android:id="@+id/script_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="154dp"
-            android:alpha="0.8"
-            android:background="@color/primaryDarkColor"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/previewView">
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
 
             <TextView
                 android:id="@+id/script_text"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="16dp"
                 android:text="@string/sample_script"
-                android:textColor="@color/white"
+                android:textColor="@color/textSecondary"
                 android:textSize="24sp"
                 android:importantForAccessibility="yes"
                 android:accessibilityLiveRegion="polite" />
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_decrease_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:text="-"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_margin="5dp" />
+
+            <Button
+                android:id="@+id/btn_increase_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_margin="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <!-- Floating Action Button for Recording -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_recording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/start_recording"
+        android:src="@drawable/ic_record"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/secondaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        android:importantForAccessibility="yes" />
+
+    <TextView
+        android:id="@+id/recording_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/recording_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/recording_progress_bar"
+        app:layout_constraintStart_toStartOf="@id/recording_progress_bar"
+        app:layout_constraintTop_toTopOf="@id/recording_progress_bar" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/recording_progress_bar"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_recording"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:importantForAccessibility="yes"
+        app:indicatorSize="80dp"
+        app:trackThickness="8dp"
+        app:indicatorColor="@color/secondaryColor"
+        app:trackColor="@color/theme" />
+
+    <!-- Button to Show Bottom Sheet -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/show_bottom_sheet_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/show_settings"
+        android:src="@drawable/ic_settings"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/secondaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        android:importantForAccessibility="yes" />
+
+    <!-- Bottom Sheet for Additional Controls -->
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="278dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/primaryLightColor"
+        android:orientation="vertical"
+        android:padding="0dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@color/backgroundColor">
 
-                <Button
-                    android:id="@+id/btn_decrease_speed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primaryColor"
-                    android:contentDescription="@string/decrease_speed"
-                    android:text="-"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:importantForAccessibility="yes" />
-
-                <Button
-                    android:id="@+id/btn_increase_speed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primaryColor"
-                    android:contentDescription="@string/increase_speed"
-                    android:text="+"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:importantForAccessibility="yes" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Floating Action Button for Recording -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_recording"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/start_recording"
-            android:src="@drawable/ic_record"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/secondaryColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.9"
-            android:importantForAccessibility="yes" />
-
-        <TextView
-            android:id="@+id/recording_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@id/recording_progress_bar"
-            app:layout_constraintEnd_toEndOf="@id/recording_progress_bar"
-            app:layout_constraintStart_toStartOf="@id/recording_progress_bar"
-            app:layout_constraintTop_toTopOf="@id/recording_progress_bar" />
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/recording_progress_bar"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/fab_recording"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:importantForAccessibility="yes"
-            app:indicatorSize="80dp"
-            app:trackThickness="8dp"
-            app:indicatorColor="@color/secondaryColor"
-            app:trackColor="@color/primaryColor" />
-
-        <!-- Button to Show Bottom Sheet -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/show_bottom_sheet_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/show_settings"
-            android:src="@drawable/ic_settings"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/secondaryColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.8"
-            android:importantForAccessibility="yes" />
-
-        <!-- Bottom Sheet for Additional Controls -->
-        <LinearLayout
-            android:id="@+id/bottom_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="278dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/primaryLightColor"
-            android:orientation="vertical"
-            android:padding="0dp"
-            app:behavior_hideable="true"
-            app:behavior_peekHeight="0dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_margin="10dp">
 
-                    <!-- Settings Heading -->
-                    <TextView
-                        android:id="@+id/settings_heading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/settings_heading"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Rotate Camera Button -->
-                    <Button
-                        android:id="@+id/rotateButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/rotate_camera"
-                        android:text="@string/rotate_camera"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Flashlight Toggle Button -->
-                    <Button
-                        android:id="@+id/toggle_flashlight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/flashlight"
-                        android:text="@string/flashlight"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Change Background Button -->
-                    <Button
-                        android:id="@+id/change_background"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/change_background"
-                        android:text="@string/change_background"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
+                </LinearLayout>
 
-                    <!-- Video Quality Spinner -->
-                    <Spinner
-                        android:id="@+id/video_quality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/video_quality"
-                        android:importantForAccessibility="yes" />
+                <!--                <Button-->
+                <!--                    android:id="@+id/toggleButton"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="Switch to ImageView"-->
+                <!--                    android:backgroundTint="@color/secondaryColor"-->
+                <!--                    android:background="@drawable/rounded_button"/>-->
 
-                    <!-- Manual Focus -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/manual_focus"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="16sp"
-                        android:importantForAccessibility="yes" />
 
-                    <SeekBar
-                        android:id="@+id/manual_focus"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:max="100"
-                        android:progressTint="@color/secondaryColor"
-                        android:thumbTint="@color/primaryColor"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Zoom Level -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/zoom_level"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="16sp"
-                        android:importantForAccessibility="yes" />
+                <!-- Settings Heading -->
+                <TextView
+                    android:id="@+id/settings_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/settings_heading"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:importantForAccessibility="yes" />
 
-                    <SeekBar
-                        android:id="@+id/zoomSeekBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:max="100"
-                        android:progress="0"
-                        android:progressTint="@color/secondaryColor"
-                        android:thumbTint="@color/primaryColor"
-                        android:importantForAccessibility="yes" />
 
-                    <Button
-                        android:id="@+id/reset_zoom_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/reset_zoom"
-                        android:text="@string/reset_zoom"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Exposure Control -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/exposure_control"
-                        android:textColor="@color/textColorPrimary"
-                        android:textSize="16sp"
-                        android:importantForAccessibility="yes" />
 
-                    <SeekBar
-                        android:id="@+id/exposure_control"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:max="100"
-                        android:progressTint="@color/secondaryColor"
-                        android:thumbTint="@color/primaryColor"
-                        android:importantForAccessibility="yes" />
+                <!-- Rotate Camera Button -->
+                <Button
+                    android:id="@+id/rotateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:contentDescription="@string/rotate_camera"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/rotate_camera"
+                    android:textColor="@color/white"
+                    android:importantForAccessibility="yes" />
 
-                    <Button
-                        android:id="@+id/reset_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/reset_exposure"
-                        android:text="@string/reset_exposure"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
+                <!-- Flashlight Toggle Button -->
+                <Button
+                    android:id="@+id/toggle_flashlight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:contentDescription="@string/flashlight"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/flashlight"
+                    android:textColor="@color/white"
+                    android:importantForAccessibility="yes" />
 
-                    <!-- Video Stabilization Button -->
-                    <Button
-                        android:id="@+id/toggle_stabilization"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/stabilization"
-                        android:text="@string/stabilization"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Grid Overlay Button -->
-                    <Button
-                        android:id="@+id/toggle_grid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
-                        android:backgroundTint="@color/secondaryColor"
-                        android:contentDescription="@string/grid"
-                        android:text="@string/grid"
-                        android:textColor="@color/white"
-                        android:importantForAccessibility="yes" />
 
-                    <!-- Timer Button -->
+                <!-- Video Quality Spinner -->
+                <Spinner
+                    android:id="@+id/video_quality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:contentDescription="@string/video_quality"
+                    android:importantForAccessibility="yes" />
+
+                <!--                    &lt;!&ndash; Manual Focus &ndash;&gt;-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginBottom="8dp"-->
+                <!--                        android:text="@string/manual_focus"-->
+                <!--                        android:textColor="@color/textColorPrimary"-->
+                <!--                        android:textSize="16sp"-->
+                <!--                        android:importantForAccessibility="yes" />-->
+
+                <!--                    <SeekBar-->
+                <!--                        android:id="@+id/manual_focus"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="48dp"-->
+                <!--                        android:layout_marginBottom="16dp"-->
+                <!--                        android:max="100"-->
+                <!--                        android:progressTint="@color/secondaryColor"-->
+                <!--                        android:thumbTint="@color/primaryColor"-->
+                <!--                        android:importantForAccessibility="yes" />-->
+
+                <!-- Zoom Level -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/zoom_level"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="16sp"
+                    android:importantForAccessibility="yes" />
+
+                <SeekBar
+                    android:id="@+id/zoomSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="@color/secondaryColor"
+                    android:thumbTint="@color/theme"
+                    android:importantForAccessibility="yes" />
+
+                <Button
+                    android:id="@+id/reset_zoom_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:contentDescription="@string/reset_zoom"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/reset_zoom"
+                    android:textColor="@color/white"
+                    android:importantForAccessibility="yes" />
+
+                <!-- Exposure Control -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/exposure_control"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="16sp"
+                    android:importantForAccessibility="yes" />
+
+                <SeekBar
+                    android:id="@+id/exposure_control"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:max="100"
+                    android:progressTint="@color/secondaryColor"
+                    android:thumbTint="@color/primaryColor"
+                    android:importantForAccessibility="yes" />
+
+                <Button
+                    android:id="@+id/reset_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:contentDescription="@string/reset_exposure"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/reset_exposure"
+                    android:textColor="@color/white"
+                    android:importantForAccessibility="yes" />
+
+                <!-- Video Stabilization Button -->
+                <Button
+                    android:id="@+id/toggle_stabilization"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:contentDescription="@string/stabilization"
+                    android:background="@drawable/rounded_button"
+                    android:text="@string/stabilization"
+                    android:textColor="@color/white"
+                    android:importantForAccessibility="yes" />
+
+                <!-- Grid Overlay Button -->
+                <Button
+                    android:id="@+id/toggle_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:background="@drawable/rounded_button"
+                    android:contentDescription="@string/grid"
+                    android:text="@string/grid"
+                    android:textColor="@color/white"
+                    android:importantForAccessibility="yes" />
+
+                <!--                &lt;!&ndash; Timer Button &ndash;&gt;-->
+                <!--                <Button-->
+                <!--                    android:id="@+id/toggle_timer"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="48dp"-->
+                <!--                    android:layout_marginBottom="16dp"-->
+                <!--                    android:backgroundTint="@color/secondaryColor"-->
+                <!--                    android:contentDescription="@string/timer"-->
+                <!--                    android:background="@drawable/rounded_button"-->
+                <!--                    android:text="@string/timer"-->
+                <!--                    android:textColor="@color/white"-->
+                <!--                    android:importantForAccessibility="yes" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp">
+
                     <Button
                         android:id="@+id/toggle_timer"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_button"
                         android:backgroundTint="@color/secondaryColor"
                         android:contentDescription="@string/timer"
                         android:text="@string/timer"
                         android:textColor="@color/white"
                         android:importantForAccessibility="yes" />
 
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+
+                <Spinner
+                    android:id="@+id/segmentationOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/segmentation_styles"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/secondaryColor"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"/>
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- Overlay FrameLayout to display the countdown timer on top of all elements -->
+    <FrameLayout
+        android:id="@+id/timer_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@android:color/transparent"
+        android:background="@drawable/timer_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/timer_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            android:text=""
+            android:textSize="50sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:visibility="gone"
+            android:importantForAccessibility="yes" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+<!-- New Layout xmlns -->
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:background="#000000">-->
+
+<!--&lt;!&ndash; Teleprompter Text Section &ndash;&gt;-->
+<!--<RelativeLayout-->
+<!--    android:id="@+id/teleprompterTextContainer"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_alignParentTop="true"-->
+<!--    android:layout_margin="16dp"-->
+<!--    android:background="#B3000000"-->
+<!--    android:padding="16dp">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/teleprompterText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Welcome to the Teleprompter for Video app which allows you to read a script from a teleprompter while filming yourself..."-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="18sp" />-->
+
+<!--    &lt;!&ndash; Controls below the teleprompter text &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/textControls"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/teleprompterText"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:gravity="center">-->
+
+<!--        &lt;!&ndash; Left Arrow Button &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_left_arrow"-->
+<!--            android:contentDescription="Left Arrow" />-->
+
+<!--        &lt;!&ndash; Up/Down Arrows &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_up_downs_arrows"-->
+<!--            android:contentDescription="Up Down Arrows"-->
+<!--            android:layout_marginHorizontal="8dp" />-->
+
+<!--        &lt;!&ndash; Right Arrow Button &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_right_arrow"-->
+<!--            android:contentDescription="Right Arrow" />-->
+
+<!--        &lt;!&ndash; Edit Button &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_edit"-->
+<!--            android:contentDescription="Edit Small"-->
+<!--            android:layout_marginStart="16dp" />-->
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash; Play/Pause Button &ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:id="@+id/playPauseButton"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:src="@drawable/ic_play_pause"-->
+<!--        android:contentDescription="Play/Pause" />-->
+
+<!--    &lt;!&ndash; Edit Icon &ndash;&gt;-->
+<!--    &lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:id="@+id/editIcon"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_width="40dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_height="40dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_alignParentEnd="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_marginTop="8dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:layout_marginEnd="8dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:src="@drawable/ic_edit"&ndash;&gt;-->
+<!--    &lt;!&ndash;            android:contentDescription="Edit" />&ndash;&gt;-->
+<!--</RelativeLayout>-->
+
+<!--&lt;!&ndash; Camera Permission Message &ndash;&gt;-->
+<!--<TextView-->
+<!--    android:id="@+id/cameraPermissionMessage"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_centerInParent="true"-->
+<!--    android:text="We need permission for the camera.\nPlease go to your settings."-->
+<!--    android:textColor="#FFFFFF"-->
+<!--    android:textSize="16sp"-->
+<!--    android:gravity="center" />-->
+
+<!--&lt;!&ndash; Bottom Navigation Bar &ndash;&gt;-->
+<!--<LinearLayout-->
+<!--    android:id="@+id/bottomNavigationBar"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_alignParentBottom="true"-->
+<!--    android:orientation="horizontal"-->
+<!--    android:gravity="center"-->
+<!--    android:padding="8dp"-->
+<!--    android:background="#000000">-->
+
+<!--    &lt;!&ndash; Settings Icon &ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:src="@drawable/ic_new_settings"-->
+<!--        android:contentDescription="Settings" />-->
+
+<!--    &lt;!&ndash; Scripts Icon &ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:src="@drawable/ic_scripts"-->
+<!--        android:contentDescription="Scripts" />-->
+
+<!--    &lt;!&ndash; Record Button &ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:src="@drawable/ic_record_button"-->
+<!--        android:contentDescription="Record"-->
+<!--        android:layout_marginHorizontal="16dp" />-->
+
+<!--    &lt;!&ndash; Scroll Speed Controls &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center_vertical">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_minus"-->
+<!--            android:contentDescription="Decrease Scroll Speed" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Scroll Speed"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="14sp"-->
+<!--            android:layout_marginHorizontal="8dp" />-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/ic_plus"-->
+<!--            android:contentDescription="Increase Scroll Speed" />-->
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash; Microphone Icon &ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:src="@drawable/ic_microphone"-->
+<!--        android:contentDescription="Microphone" />-->
+<!--</LinearLayout>-->
+<!--</RelativeLayout>-->
+
+
